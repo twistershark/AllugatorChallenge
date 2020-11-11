@@ -15,6 +15,9 @@ class Collaborator {
   nome: string;
 
   @Column()
+  cargo: string;
+
+  @Column()
   cpf: string;
 
   @Column()

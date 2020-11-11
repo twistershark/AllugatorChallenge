@@ -3,7 +3,7 @@ export default interface ICreateCollaboratorDTO {
   cpf: string;
   job: string;
   signUpDate: Date;
-  UF: string;
+  uf: string;
   salary: number;
   status: string;
 }
