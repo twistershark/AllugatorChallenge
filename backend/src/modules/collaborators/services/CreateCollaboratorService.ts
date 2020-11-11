@@ -1,14 +1,14 @@
 import { inject, injectable } from 'tsyringe';
-// import AppError from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
 
-import Collaborator from '../infra/typeorm/entities/Collaborator';
 import ICollaboratorsRepository from '../repositories/ICollaboratorsRepository';
+import Collaborator from '../infra/typeorm/entities/Collaborator';
 
 interface IRequest {
   name: string;
   cpf: string;
   job: string;
-  signUpDate: Date;
+  signUpDate: string;
   uf: string;
   salary: number;
   status: string;
@@ -33,7 +33,7 @@ class CreateCollaboratorService {
     const checkUserExists = await this.collaboratorsRepository.findByCPF(cpf);
 
     if (checkUserExists) {
-      throw new Error('Collaborator already exists');
+      throw new AppError('Collaborator already exists');
     }
 
     const collaborator = await this.collaboratorsRepository.create({

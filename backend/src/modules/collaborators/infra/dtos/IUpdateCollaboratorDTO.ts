@@ -3,8 +3,8 @@ export default interface IUpdateCollaboratorDTO {
   name?: string;
   cpf?: string;
   job?: string;
-  signUpDate?: Date;
-  UF?: string;
+  signUpDate?: string;
+  uf?: string;
   salary?: number;
   status?: string;
 }

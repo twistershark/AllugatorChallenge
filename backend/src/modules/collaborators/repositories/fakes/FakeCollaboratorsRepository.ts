@@ -22,12 +22,12 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
 
     Object.assign(collaborator, {
       id: uuid(),
-      nome: name,
+      name,
       cpf,
       uf,
-      cargo: job,
-      salario: salary,
-      dataCad: signUpDate,
+      job,
+      salary,
+      signUpDate,
       status,
     });
 
@@ -37,12 +37,13 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
   }
 
   public async update(data: IUpdateCollaboratorDTO): Promise<Collaborator> {
+    console.log(data);
     return this.collaborators[0];
   }
 
   public async findByName(name: string): Promise<Collaborator[] | undefined> {
     const findCollaborators = this.collaborators.filter(collaborator =>
-      collaborator.nome.includes(name),
+      collaborator.name.includes(name),
     );
 
     return findCollaborators;
@@ -58,7 +59,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
 
   public async findByJob(job: string): Promise<Collaborator[] | undefined> {
     const findCollaborators = this.collaborators.filter(
-      collaborator => collaborator.cargo === job,
+      collaborator => collaborator.job === job,
     );
 
     return findCollaborators;
@@ -67,6 +68,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
   public async findBySignUpDate(
     date: string,
   ): Promise<Collaborator[] | undefined> {
+    console.log(date);
     return this.collaborators;
   }
 
@@ -79,8 +81,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     max: number,
   ): Promise<Collaborator[] | undefined> {
     const findCollaborators = this.collaborators.filter(
-      collaborator =>
-        collaborator.salario >= min && collaborator.salario <= max,
+      collaborator => collaborator.salary >= min && collaborator.salary <= max,
     );
 
     return findCollaborators;

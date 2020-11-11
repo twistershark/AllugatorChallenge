@@ -15,11 +15,11 @@ export default class CreateCollaborators1605069306888
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'nome',
+            name: 'name',
             type: 'varchar',
           },
           {
-            name: 'cargo',
+            name: 'job',
             type: 'varchar',
           },
           {
@@ -32,7 +32,7 @@ export default class CreateCollaborators1605069306888
             length: '2',
           },
           {
-            name: 'salario',
+            name: 'salary',
             type: 'decimal',
             scale: 2,
           },
@@ -41,8 +41,8 @@ export default class CreateCollaborators1605069306888
             type: 'varchar',
           },
           {
-            name: 'dataCad',
-            type: 'date',
+            name: 'signUpDate',
+            type: 'varchar',
           },
           {
             name: 'created_at',

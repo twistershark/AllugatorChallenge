@@ -57,6 +57,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     date: string,
   ): Promise<Collaborator[] | undefined> {
     // Need to implement
+    console.log(date);
     return undefined;
   }
 

@@ -12,10 +12,10 @@ class Collaborator {
   id: string;
 
   @Column()
-  nome: string;
+  name: string;
 
   @Column()
-  cargo: string;
+  job: string;
 
   @Column()
   cpf: string;
@@ -24,13 +24,13 @@ class Collaborator {
   uf: string;
 
   @Column()
-  salario: number;
+  salary: number;
 
   @Column()
   status: string;
 
   @Column()
-  dataCad: Date;
+  signUpDate: string;
 
   @CreateDateColumn()
   created_at: Date;
