@@ -5,6 +5,7 @@ import IUpdateCollaboratorDTO from '@modules/collaborators/infra/dtos/IUpdateCol
 export default interface ICollaboratorsRepository {
   create(data: ICreateCollaboratorDTO): Promise<Collaborator>;
   update(data: IUpdateCollaboratorDTO): Promise<Collaborator>;
+  findAllCollaborators(): Promise<Collaborator[] | undefined>;
   findByName(name: string): Promise<Collaborator[] | undefined>;
   findByCPF(cpf: string): Promise<Collaborator | undefined>;
   findByJob(job: string): Promise<Collaborator[] | undefined>;

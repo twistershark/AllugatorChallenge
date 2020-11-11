@@ -29,6 +29,12 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     return collaborator;
   }
 
+  public async findAllCollaborators(): Promise<Collaborator[] | undefined> {
+    const collaborators = await this.ormRepository.find();
+
+    return collaborators;
+  }
+
   public async findByName(name: string): Promise<Collaborator[] | undefined> {
     const collaborators = await this.ormRepository.find({
       where: { name },
@@ -56,9 +62,10 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
   public async findBySignUpDate(
     date: string,
   ): Promise<Collaborator[] | undefined> {
-    // Need to implement
-    console.log(date);
-    return undefined;
+    const collaborators = await this.ormRepository.find({
+      where: { signUpDate: date },
+    });
+    return collaborators;
   }
 
   public async loadAllUFs(): Promise<Collaborator[] | undefined> {
@@ -71,7 +78,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     max: number,
   ): Promise<Collaborator[] | undefined> {
     const collaborators = await this.ormRepository.find({
-      where: { salario: Between(min, max) },
+      where: { salary: Between(min, max) },
     });
 
     return collaborators;

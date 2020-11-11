@@ -41,6 +41,10 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     return this.collaborators[0];
   }
 
+  public async findAllCollaborators(): Promise<Collaborator[] | undefined> {
+    return this.collaborators;
+  }
+
   public async findByName(name: string): Promise<Collaborator[] | undefined> {
     const findCollaborators = this.collaborators.filter(collaborator =>
       collaborator.name.includes(name),

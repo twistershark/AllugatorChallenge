@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateCollaboratorService from '@modules/collaborators/services/CreateCollaboratorService';
-import ShowCollaboratorByCPFService from '@modules/collaborators/services/ShowCollaboratorByCPFService';
+import ListCollaboratorsService from '@modules/collaborators/services/ListCollaboratorsService';
 
 export default class CollaboratorsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -17,16 +17,12 @@ export default class CollaboratorsController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const { cpf } = request.params;
-
-    const showCollaboratorByCPF = container.resolve(
-      ShowCollaboratorByCPFService,
+    const listCollaboratorsService = container.resolve(
+      ListCollaboratorsService,
     );
 
-    const collaborator = await showCollaboratorByCPF.execute({
-      cpf,
-    });
+    const collaborators = await listCollaboratorsService.execute();
 
-    return response.json(collaborator);
+    return response.json(collaborators);
   }
 }
