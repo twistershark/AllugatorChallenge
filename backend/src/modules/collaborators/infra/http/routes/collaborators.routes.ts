@@ -1,5 +1,9 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 
-const usersRouter = Router();
+const collaboratorsRouter = Router();
 
-export default usersRouter;
+collaboratorsRouter.get('/', (request: Request, response: Response) => {
+  return response.send('working');
+});
+
+export default collaboratorsRouter;

@@ -1,6 +1,6 @@
-import Collaborator from '../infra/typeorm/entities/Collaborator';
-import ICreateCollaboratorDTO from '../infra/dtos/ICreateCollaboratorDTO';
-import IUpdateCollaboratorDTO from '../infra/dtos/IUpdateCollaboratorDTO';
+import Collaborator from '@modules/collaborators/infra/typeorm/entities/Collaborator';
+import ICreateCollaboratorDTO from '@modules/collaborators/infra/dtos/ICreateCollaboratorDTO';
+import IUpdateCollaboratorDTO from '@modules/collaborators/infra/dtos/IUpdateCollaboratorDTO';
 
 export default interface ICollaboratorsRepository {
   create(data: ICreateCollaboratorDTO): Promise<Collaborator>;

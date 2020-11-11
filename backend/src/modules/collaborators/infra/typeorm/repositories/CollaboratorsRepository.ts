@@ -1,8 +1,8 @@
 import { getRepository, Repository, Between } from 'typeorm';
 
-import ICollaboratorsRepository from '../../../repositories/ICollaboratsRepository';
-import ICreateCollaboratorDTO from '../../dtos/ICreateCollaboratorDTO';
-import IUpdateCollaboratorDTO from '../../dtos/IUpdateCollaboratorDTO';
+import ICollaboratorsRepository from '@modules/collaborators/repositories/ICollaboratsRepository';
+import ICreateCollaboratorDTO from '@modules/collaborators/infra/dtos/ICreateCollaboratorDTO';
+import IUpdateCollaboratorDTO from '@modules/collaborators/infra/dtos/IUpdateCollaboratorDTO';
 
 import Collaborator from '../entities/Collaborator';
 
