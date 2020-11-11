@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import collaboratorsRouter from '../../../../modules/collaborators/infra/http/routes/collaboratos.routes';
+import collaboratorsRouter from '../../../../modules/collaborators/infra/http/routes/collaborators.routes';
 
 const routes = Router();
 
