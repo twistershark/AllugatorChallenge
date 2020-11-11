@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 
 import CreateCollaboratorService from '@modules/collaborators/services/CreateCollaboratorService';
 import ListCollaboratorsService from '@modules/collaborators/services/ListCollaboratorsService';
+import DeleteCollaboratorService from '@modules/collaborators/services/DeleteCollaboratorService';
 
 export default class CollaboratorsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -24,5 +25,19 @@ export default class CollaboratorsController {
     const collaborators = await listCollaboratorsService.execute();
 
     return response.json(collaborators);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { cpf } = request.params;
+
+    const deleteCollaboratorService = container.resolve(
+      DeleteCollaboratorService,
+    );
+
+    await deleteCollaboratorService.execute({
+      cpf,
+    });
+
+    return response.status(200);
   }
 }
