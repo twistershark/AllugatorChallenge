@@ -1,10 +1,10 @@
 import { getRepository, Repository, Between } from 'typeorm';
 
-import ICollaboratorsRepository from '@modules/collaborators/repositories/ICollaboratsRepository';
+import ICollaboratorsRepository from '@modules/collaborators/repositories/ICollaboratorsRepository';
 import ICreateCollaboratorDTO from '@modules/collaborators/infra/dtos/ICreateCollaboratorDTO';
 import IUpdateCollaboratorDTO from '@modules/collaborators/infra/dtos/IUpdateCollaboratorDTO';
 
-import Collaborator from '../entities/Collaborator';
+import Collaborator from '@modules/collaborators/infra/typeorm/entities/Collaborator';
 
 class CollaboratorsRepository implements ICollaboratorsRepository {
   private ormRepository: Repository<Collaborator>;
