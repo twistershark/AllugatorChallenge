@@ -72,8 +72,10 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
   public async findBySignUpDate(
     date: string,
   ): Promise<Collaborator[] | undefined> {
-    console.log(date);
-    return this.collaborators;
+    const findCollaborators = this.collaborators.filter(
+      collaborator => collaborator.signUpDate === date,
+    );
+    return findCollaborators;
   }
 
   public async loadAllUFs(): Promise<Collaborator[] | undefined> {
