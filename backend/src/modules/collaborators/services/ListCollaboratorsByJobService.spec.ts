@@ -1,23 +1,23 @@
 import FakeCollaboratorsRepository from '@modules/collaborators/repositories/fakes/FakeCollaboratorsRepository';
 import CreateCollaboratorService from './CreateCollaboratorService';
-import ListCollaboratorsByNameService from './ListCollaboratorsByNameService';
+import ListCollaboratorsByJobService from './ListCollaboratorsByJobService';
 
 let fakeCollaboratorsRepository: FakeCollaboratorsRepository;
 let createCollaborator: CreateCollaboratorService;
-let listCollaboratorsByNameService: ListCollaboratorsByNameService;
+let listCollaboratorsByJobService: ListCollaboratorsByJobService;
 
-describe('ListCollaboratorsByName', () => {
+describe('ListCollaboratorsByJob', () => {
   beforeEach(() => {
     fakeCollaboratorsRepository = new FakeCollaboratorsRepository();
     createCollaborator = new CreateCollaboratorService(
       fakeCollaboratorsRepository,
     );
-    listCollaboratorsByNameService = new ListCollaboratorsByNameService(
+    listCollaboratorsByJobService = new ListCollaboratorsByJobService(
       fakeCollaboratorsRepository,
     );
   });
 
-  it('should be able to list collaborators by name', async () => {
+  it('should be able to list collaborators by job', async () => {
     const collaborator1 = await createCollaborator.execute({
       name: 'Paulo',
       cpf: '00011122234',
@@ -38,14 +38,14 @@ describe('ListCollaboratorsByName', () => {
       status: 'ACTIVE',
     });
 
-    const collaborators = await listCollaboratorsByNameService.execute({
-      name: 'Paulo',
+    const collaborators = await listCollaboratorsByJobService.execute({
+      job: 'Dev',
     });
 
     expect(collaborators).toEqual([collaborator1, collaborator2]);
   });
 
-  it('should not find any collaborator using a unknown name', async () => {
+  it('should not find any collaborator using a unknown job', async () => {
     await createCollaborator.execute({
       name: 'Paulo',
       cpf: '00011122234',
@@ -66,8 +66,8 @@ describe('ListCollaboratorsByName', () => {
       status: 'ACTIVE',
     });
 
-    const collaborators = await listCollaboratorsByNameService.execute({
-      name: 'Guilherme',
+    const collaborators = await listCollaboratorsByJobService.execute({
+      job: 'Driver',
     });
 
     expect(collaborators).toEqual([]);
