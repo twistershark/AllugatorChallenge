@@ -3,8 +3,10 @@ import { getRepository, Repository, Between } from 'typeorm';
 import ICollaboratorsRepository from '@modules/collaborators/repositories/ICollaboratorsRepository';
 import ICreateCollaboratorDTO from '@modules/collaborators/infra/dtos/ICreateCollaboratorDTO';
 import IUpdateCollaboratorDTO from '@modules/collaborators/infra/dtos/IUpdateCollaboratorDTO';
+import IResponseFindByUFDTO from '@modules/collaborators/infra/dtos/IResponseFindByUFDTO';
 
 import Collaborator from '@modules/collaborators/infra/typeorm/entities/Collaborator';
+import AppError from '@shared/errors/AppError';
 
 class CollaboratorsRepository implements ICollaboratorsRepository {
   private ormRepository: Repository<Collaborator>;
@@ -68,7 +70,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     return collaborators;
   }
 
-  public async findByUF(uf: string): Promise<Collaborator[] | undefined> {
+  public async findByUF(uf: string): Promise<IResponseFindByUFDTO | undefined> {
     const foundCollaborators = await this.ormRepository.findAndCount({
       where: { uf },
     });
@@ -100,7 +102,15 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
   }
 
   public async deleteCollaborator(cpf: string): Promise<void> {
-    await this.ormRepository.delete(cpf);
+    const collaborator = await this.ormRepository.findOne({
+      where: { cpf },
+    });
+
+    if (!collaborator) {
+      throw new AppError('Failed to find the collaborator');
+    }
+
+    await this.ormRepository.delete(collaborator.id);
   }
 }
 
