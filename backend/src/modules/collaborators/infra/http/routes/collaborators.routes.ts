@@ -17,10 +17,10 @@ collaboratorsRouter.post('/', collaboratorsController.create);
 collaboratorsRouter.get('/', collaboratorsController.index);
 collaboratorsRouter.delete('/:cpf', collaboratorsController.delete);
 
-// Show collaborator using CPF
-collaboratorsRouter.get('/:cpf', showCollaboratorByCPFController.index);
-
 // List collaborators by query params
 collaboratorsRouter.get('/list', listCollaboratorsController.index);
+
+// Show collaborator using CPF
+collaboratorsRouter.get('/:cpf', showCollaboratorByCPFController.index);
 
 export default collaboratorsRouter;

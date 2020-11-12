@@ -19,7 +19,7 @@ interface IRequest {
   uf?: string;
 }
 
-export default class ListCollaboratorsByJobController {
+export default class ListCollaboratorsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const {
       job,

@@ -38,6 +38,8 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
   }
 
   public async findByName(name: string): Promise<Collaborator[] | undefined> {
+    // CORRIGIR. ELE ESTÁ ENCONTRANDO APENAS SE O NOME ESTIVER IDENTICO
+
     const collaborators = await this.ormRepository.find({
       where: { name },
     });
@@ -71,13 +73,16 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
   }
 
   public async findByUF(uf: string): Promise<IResponseFindByUFDTO | undefined> {
-    const foundCollaborators = await this.ormRepository.findAndCount({
+    const [collaborators, amount] = await this.ormRepository.findAndCount({
       where: { uf },
     });
 
-    console.log(foundCollaborators);
+    const res = {
+      arrayCollaborators: collaborators,
+      amount,
+    };
 
-    return undefined;
+    return res;
   }
 
   public async findBySalary(

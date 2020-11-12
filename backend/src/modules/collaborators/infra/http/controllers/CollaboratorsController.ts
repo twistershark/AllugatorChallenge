@@ -38,6 +38,6 @@ export default class CollaboratorsController {
       cpf,
     });
 
-    return response.status(200);
+    return response.sendStatus(200);
   }
 }
