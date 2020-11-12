@@ -12,10 +12,10 @@ export default class ListCollaboratorsByJobController {
       ListCollaboratorsByJobService,
     );
 
-    const collaborator = await listCollaboratorsByJobService.execute({
+    const collaborators = await listCollaboratorsByJobService.execute({
       job,
     });
 
-    return response.json(collaborator);
+    return response.json(collaborators);
   }
 }

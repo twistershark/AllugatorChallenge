@@ -12,10 +12,10 @@ export default class ListCollaboratorsByNameController {
       ListCollaboratorsByNameService,
     );
 
-    const collaborator = await listCollaboratorsByNameService.execute({
+    const collaborators = await listCollaboratorsByNameService.execute({
       name,
     });
 
-    return response.json(collaborator);
+    return response.json(collaborators);
   }
 }
