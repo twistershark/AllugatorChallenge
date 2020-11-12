@@ -3,6 +3,7 @@ import { uuid } from 'uuidv4';
 import ICollaboratorsRepository from '@modules/collaborators/repositories/ICollaboratorsRepository';
 import ICreateCollaboratorDTO from '@modules/collaborators/infra/dtos/ICreateCollaboratorDTO';
 import IUpdateCollaboratorDTO from '@modules/collaborators/infra/dtos/IUpdateCollaboratorDTO';
+import IResponseFindByUFDTO from '@modules/collaborators/infra/dtos/IResponseFindByUFDTO';
 
 import Collaborator from '@modules/collaborators/infra/typeorm/entities/Collaborator';
 
@@ -78,8 +79,17 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     return findCollaborators;
   }
 
-  public async loadAllUFs(): Promise<Collaborator[] | undefined> {
-    return this.collaborators;
+  public async findByUF(uf: string): Promise<IResponseFindByUFDTO | undefined> {
+    const findCollaborators = this.collaborators.filter(
+      collaborator => collaborator.uf === uf,
+    );
+
+    const res = {
+      arrayCollaborators: findCollaborators,
+      amount: findCollaborators.length,
+    };
+
+    return res;
   }
 
   public async findBySalary(

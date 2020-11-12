@@ -68,8 +68,13 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     return collaborators;
   }
 
-  public async loadAllUFs(): Promise<Collaborator[] | undefined> {
-    // Need to implement
+  public async findByUF(uf: string): Promise<Collaborator[] | undefined> {
+    const foundCollaborators = await this.ormRepository.findAndCount({
+      where: { uf },
+    });
+
+    console.log(foundCollaborators);
+
     return undefined;
   }
 
