@@ -7,7 +7,7 @@ let fakeCollaboratorsRepository: FakeCollaboratorsRepository;
 let createCollaborator: CreateCollaboratorService;
 let listCollaboratorsService: ListCollaboratorsService;
 
-describe('ShowCollaboratorByCPF', () => {
+describe('ListCollaborators', () => {
   beforeEach(() => {
     fakeCollaboratorsRepository = new FakeCollaboratorsRepository();
     createCollaborator = new CreateCollaboratorService(
