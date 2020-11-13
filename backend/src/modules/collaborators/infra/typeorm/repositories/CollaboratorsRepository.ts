@@ -55,7 +55,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
 
   public async findByJob(job: string): Promise<Collaborator[] | undefined> {
     const collaborators = await this.ormRepository.find({
-      where: { job },
+      where: { job: ILike(`%${job}%`) },
     });
 
     return collaborators;
