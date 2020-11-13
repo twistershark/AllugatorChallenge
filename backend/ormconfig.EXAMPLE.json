@@ -2,8 +2,8 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "THEUSERNAME",
-  "password": "THEPASSWORD",
+  "username": "YOURUSERNAME",
+  "password": "YOURPASSWORD",
   "database": "allugator",
   "migrations": [
     "./src/shared/infra/typeorm/migrations/*.ts"
