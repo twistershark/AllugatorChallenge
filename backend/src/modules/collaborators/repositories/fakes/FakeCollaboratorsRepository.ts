@@ -38,8 +38,17 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
   }
 
   public async update(data: IUpdateCollaboratorDTO): Promise<Collaborator> {
-    console.log(data);
-    return this.collaborators[0];
+    const oldCollaboratorIndex = this.collaborators.findIndex(
+      collaborator => collaborator.cpf === data.cpf,
+    );
+
+    this.collaborators[oldCollaboratorIndex] = {
+      ...data,
+      created_at: this.collaborators[oldCollaboratorIndex].created_at,
+      updated_at: this.collaborators[oldCollaboratorIndex].updated_at,
+    };
+
+    return this.collaborators[oldCollaboratorIndex];
   }
 
   public async findAllCollaborators(): Promise<Collaborator[] | undefined> {

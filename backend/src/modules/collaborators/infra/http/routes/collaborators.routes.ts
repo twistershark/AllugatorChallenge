@@ -12,9 +12,9 @@ const listCollaboratorsController = new ListCollaboratorsController();
 
 // Routes
 
-// Create, Read and Delete Collaborator
-collaboratorsRouter.post('/', collaboratorsController.create);
+// Create, Read, Update and Delete Collaborator
 collaboratorsRouter.get('/', collaboratorsController.index);
+collaboratorsRouter.post('/', collaboratorsController.create);
 collaboratorsRouter.delete('/:cpf', collaboratorsController.delete);
 
 // List collaborators by query params

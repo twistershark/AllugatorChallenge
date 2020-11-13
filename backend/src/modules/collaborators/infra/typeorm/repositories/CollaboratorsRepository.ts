@@ -1,4 +1,4 @@
-import { getRepository, Repository, Between } from 'typeorm';
+import { getRepository, Repository, Between, ILike } from 'typeorm';
 
 import ICollaboratorsRepository from '@modules/collaborators/repositories/ICollaboratorsRepository';
 import ICreateCollaboratorDTO from '@modules/collaborators/infra/dtos/ICreateCollaboratorDTO';
@@ -38,10 +38,8 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
   }
 
   public async findByName(name: string): Promise<Collaborator[] | undefined> {
-    // CORRIGIR. ELE ESTÁ ENCONTRANDO APENAS SE O NOME ESTIVER IDENTICO
-
     const collaborators = await this.ormRepository.find({
-      where: { name },
+      where: { name: ILike(`%${name}%`) },
     });
 
     return collaborators;

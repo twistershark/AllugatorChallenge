@@ -1,5 +1,4 @@
 import { inject, injectable } from 'tsyringe';
-import AppError from '@shared/errors/AppError';
 
 import ICollaboratorsRepository from '../repositories/ICollaboratorsRepository';
 import Collaborator from '../infra/typeorm/entities/Collaborator';
@@ -33,7 +32,18 @@ class CreateCollaboratorService {
     const checkUserExists = await this.collaboratorsRepository.findByCPF(cpf);
 
     if (checkUserExists) {
-      throw new AppError('Collaborator already exists');
+      const updatedCollaborator = await this.collaboratorsRepository.update({
+        id: checkUserExists.id,
+        name,
+        cpf,
+        job,
+        signUpDate,
+        uf,
+        salary,
+        status,
+      });
+
+      return updatedCollaborator;
     }
 
     const collaborator = await this.collaboratorsRepository.create({
