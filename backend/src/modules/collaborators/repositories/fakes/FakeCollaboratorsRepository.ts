@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuid_v4 } from 'uuid';
 
 import ICollaboratorsRepository from '@modules/collaborators/repositories/ICollaboratorsRepository';
 import ICreateCollaboratorDTO from '@modules/collaborators/infra/dtos/ICreateCollaboratorDTO';
@@ -22,7 +22,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     const collaborator = new Collaborator();
 
     Object.assign(collaborator, {
-      id: uuid(),
+      id: uuid_v4(),
       name,
       cpf,
       uf,
