@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.nav`
+  position: fixed;
   height: 100vh;
   max-width: 14rem;
   background: #fff;

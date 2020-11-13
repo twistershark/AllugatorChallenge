@@ -6,13 +6,16 @@ export const Container = styled.div`
 
 export const TableContainer = styled.section`
   margin-top: 64px;
-  margin-left: 16px;
+  margin-left: 15rem;
   table {
     width: 100%;
+    position: relative;
     border-spacing: 0 8px;
     th {
-      background: #fff;
-      color: #10cf58;
+      position: sticky;
+      top: 0;
+      background: #10cf58;
+      color: #fff;
       font-weight: bold;
       padding: 20px 32px;
       text-align: left;
