@@ -7,6 +7,10 @@ type buttonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export const Container = styled.button<buttonProps>`
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+
   background: #fff;
   border: none;
   border-radius: 24px;
@@ -27,6 +31,10 @@ export const Container = styled.button<buttonProps>`
   &:hover {
     color: #fff;
     background: ${shade(0.2, '#10cf58')};
+
+    svg {
+      fill: #fff;
+    }
   }
 
   ${props =>
@@ -35,4 +43,8 @@ export const Container = styled.button<buttonProps>`
       background: #8ef5b5;
       color: #10cf58;
     `}
+`;
+
+export const ButtonText = styled.span`
+  margin-left: 10px;
 `;

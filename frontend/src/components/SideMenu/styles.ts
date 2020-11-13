@@ -26,6 +26,15 @@ export const SideMenuButtons = styled.div`
 `;
 
 export const SideMenuExitButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    display: none;
+    transition: display 2000ms;
+  }
+
   margin-top: auto;
   margin-bottom: 1rem;
 
@@ -43,5 +52,9 @@ export const SideMenuExitButton = styled.button`
 
   &:hover {
     background: ${shade(0.2, '#10cf58')};
+
+    svg {
+      display: inline-block;
+    }
   }
 `;

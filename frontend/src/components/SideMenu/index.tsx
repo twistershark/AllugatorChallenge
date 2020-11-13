@@ -1,4 +1,5 @@
 import React from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
 
 import { Container, Logo, SideMenuButtons, SideMenuExitButton } from './styles';
 
@@ -11,10 +12,15 @@ const SideMenu: React.FC = () => {
     <Container>
       <Logo src={logoImg} />
       <SideMenuButtons>
-        <Button>Painel</Button>
-        <Button>Cadastro</Button>
+        <Button selected iconName="apps-outline">
+          Painel
+        </Button>
+        <Button iconName="person-outline">Cadastro</Button>
       </SideMenuButtons>
-      <SideMenuExitButton>Sair</SideMenuExitButton>
+      <SideMenuExitButton>
+        <IoIosArrowBack size={16} fill="#fff" />
+        Sair
+      </SideMenuExitButton>
     </Container>
   );
 };
