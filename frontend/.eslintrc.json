@@ -20,19 +20,18 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint",
         "react-hooks",
-        "prettier"
+        "prettier",
+        "@typescript-eslint"
     ],
     "rules": {
-      "prettier/prettier": "error",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
       "react-hooks/rules-of-hooks": "error",
       "no-use-before-define": "off",
       "react-hooks/exhaustive-deps": "warn",
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
       "import/prefer-default-export": "off",
       "camelcase": "off",
+      "prettier/prettier": "error",
       "@typescript-eslint/ban-types": "off",
       "import/extensions": [
         "error",
