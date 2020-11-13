@@ -18,7 +18,7 @@ export const Container = styled.button<buttonProps>`
   height: 3.5rem;
   width: 85%;
   text-align: left;
-  transition: background-color 200ms;
+  transition: background-color 400ms;
 
   color: #babdc2;
   font-size: 1rem;

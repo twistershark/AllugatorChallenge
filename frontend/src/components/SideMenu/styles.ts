@@ -33,7 +33,6 @@ export const SideMenuExitButton = styled.button`
 
   svg {
     display: none;
-    transition: display 2000ms;
   }
 
   margin-top: auto;
@@ -45,7 +44,7 @@ export const SideMenuExitButton = styled.button`
   height: 3rem;
   width: 70%;
   text-align: center;
-  transition: background-color 200ms;
+  transition: background-color 400ms;
 
   color: #fff;
   font-size: 1rem;
