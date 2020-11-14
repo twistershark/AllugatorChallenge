@@ -26,35 +26,19 @@ export const SideMenuButtons = styled.div`
   width: 100%;
 `;
 
-export const SideMenuExitButton = styled.button`
+export const SideMenuExitText = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  svg {
-    display: none;
-  }
-
   margin-top: auto;
   margin-bottom: 1rem;
 
-  background: #10cf58;
-  border: none;
-  border-radius: 24px;
   height: 3rem;
   width: 70%;
   text-align: center;
-  transition: background-color 400ms;
 
-  color: #fff;
-  font-size: 1rem;
-  font-weight: bold;
-
-  &:hover {
-    background: ${shade(0.2, '#10cf58')};
-
-    svg {
-      display: inline-block;
-    }
-  }
+  color: #10cf58;
+  font-size: 0.8rem;
+  font-weight: normal;
 `;

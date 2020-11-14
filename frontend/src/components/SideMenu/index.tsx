@@ -1,7 +1,6 @@
 import React from 'react';
-import { IoIosArrowBack } from 'react-icons/io';
 
-import { Container, Logo, SideMenuButtons, SideMenuExitButton } from './styles';
+import { Container, Logo, SideMenuButtons, SideMenuExitText } from './styles';
 
 import Button from '../Button';
 
@@ -23,10 +22,7 @@ const SideMenu: React.FC<Props> = ({ selected }) => {
           Cadastro
         </Button>
       </SideMenuButtons>
-      <SideMenuExitButton>
-        <IoIosArrowBack size={16} fill="#fff" />
-        Sair
-      </SideMenuExitButton>
+      <SideMenuExitText>Desenvolvido por Paulo Victor </SideMenuExitText>
     </Container>
   );
 };
