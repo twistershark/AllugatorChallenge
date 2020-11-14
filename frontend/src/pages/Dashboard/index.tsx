@@ -57,83 +57,173 @@ const Dashboard: React.FC = () => {
     loadData();
   }, []);
 
+  // const loadAllCollaborators = useCallback(() => {
+  //   async function loadData() {
+  //     const response = await api.get('/');
+
+  //     const collaboratorsFormatted = response.data.map(
+  //       (collaborator: Collaborator) => ({
+  //         ...collaborator,
+  //         formattedSallary: formatValue(collaborator.salary),
+  //       }),
+  //     );
+
+  //     setCollaborators(collaboratorsFormatted);
+  //   }
+
+  //   loadData();
+  // }, []);
+
   const handleSetFilter = useCallback(
     number => {
-      if (number === filter) setFilter(-1);
-      else setFilter(number);
+      setSearchValue('');
+      setMaxSalary('');
+      setMinSalary('');
+      if (number === filter) {
+        setFilter(-1);
+      } else setFilter(number);
     },
     [filter],
   );
 
-  const Input = useCallback(() => {
-    switch (filter) {
-      case 0:
-        return (
-          <FilterInput
-            value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
-            placeholder="Nome do funcionário"
-          />
-        );
-      case 1:
-        return (
-          <FilterInput
-            value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
-            placeholder="CPF do funcionário"
-          />
-        );
-      case 2:
-        return (
-          <FilterInput
-            value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
-            placeholder="Cargo do funcionário"
-          />
-        );
-      case 3:
-        return (
-          <SalaryFilterContainer>
-            <FilterInput
-              value={minSalary}
-              onChange={e => setMinSalary(e.target.value)}
-              placeholder="Valor mínimo de salário"
-            />
-            <FilterInput
-              value={maxSalary}
-              onChange={e => setMaxSalary(e.target.value)}
-              placeholder="Valor máximo de salário"
-            />
-          </SalaryFilterContainer>
-        );
-      case 4:
-        return (
-          <FilterInput
-            value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
-            placeholder="Status do funcionário"
-          />
-        );
-      case 5:
-        return (
-          <FilterInput
-            value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
-            placeholder="UF do funcionário"
-          />
-        );
-      case 6:
-        return (
-          <FilterInput
-            value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
-            placeholder="Data de cadastro do funcionário"
-          />
-        );
-      default:
-        return null;
-    }
-  }, [filter, minSalary, maxSalary, searchValue]);
+  // const loadFilteredData = useCallback(() => {
+  //   async function loadData() {
+  //     // const response = await api.get('/list', {
+  //     //   params: { [`${param}`]: value },
+  //     // });
+
+  //     const response = await api.get('/list', {
+  //       params: {
+  //         name: searchValue,
+  //         cpf: '',
+  //         job: '',
+  //         min: '',
+  //         max: '',
+  //         status: '',
+  //         uf: '',
+  //         signUpDate: '',
+  //       },
+  //     });
+
+  //     const collaboratorsFormatted = response.data.map(
+  //       (collaborator: Collaborator) => ({
+  //         ...collaborator,
+  //         formattedSallary: formatValue(collaborator.salary),
+  //       }),
+  //     );
+
+  //     setCollaborators(collaboratorsFormatted);
+  //   }
+  //   loadData();
+  // }, [searchValue]);
+
+  // const findByCPF = useCallback((cpf: string) => {
+  //   async function loadData() {
+  //     const response = await api.get(`/list/${cpf}`);
+
+  //     const collaboratorsFormatted = response.data.map(
+  //       (collaborator: Collaborator) => ({
+  //         ...collaborator,
+  //         formattedSallary: formatValue(collaborator.salary),
+  //       }),
+  //     );
+
+  //     setCollaborators(collaboratorsFormatted);
+  //   }
+  //   loadData();
+  // }, []);
+
+  // const findBySalary = useCallback((min: string, max: string) => {
+  //   async function loadData() {
+  //     const response = await api.get('/list', {
+  //       params: { min, max },
+  //     });
+
+  //     const collaboratorsFormatted = response.data.map(
+  //       (collaborator: Collaborator) => ({
+  //         ...collaborator,
+  //         formattedSallary: formatValue(collaborator.salary),
+  //       }),
+  //     );
+
+  //     setCollaborators(collaboratorsFormatted);
+  //   }
+  //   loadData();
+  // }, []);
+
+  // function handleSearchWithFilter() {
+  //   switch (filter) {
+  //     case 0:
+  //       loadFilteredData('name', searchValue);
+  //       break;
+  //     case 1:
+  //       findByCPF(searchValue);
+  //       break;
+  //     case 2:
+  //       loadFilteredData('job', searchValue);
+  //       break;
+  //     case 3:
+  //       findBySalary(minSalary, maxSalary);
+  //       break;
+  //     case 4:
+  //       loadFilteredData('status', searchValue);
+  //       break;
+  //     case 5:
+  //       loadFilteredData('uf', searchValue);
+  //       break;
+  //     case 6:
+  //       loadFilteredData('signUpDate', searchValue);
+  //       break;
+  //     default: {
+  //       loadAllCollaborators();
+  //     }
+  //   }
+  // }
+
+  const filterInputs = [
+    <FilterInput
+      value={searchValue}
+      onChange={e => setSearchValue(e.target.value)}
+      placeholder="Nome do funcionário"
+    />,
+    <FilterInput
+      value={searchValue}
+      onChange={e => setSearchValue(e.target.value)}
+      placeholder="CPF do funcionário"
+    />,
+    <FilterInput
+      value={searchValue}
+      onChange={e => setSearchValue(e.target.value)}
+      placeholder="Cargo do funcionário"
+    />,
+    <SalaryFilterContainer>
+      <FilterInput
+        value={minSalary}
+        onChange={e => setMinSalary(e.target.value)}
+        placeholder="Valor mínimo de salário"
+      />
+      <FilterInput
+        value={maxSalary}
+        onChange={e => setMaxSalary(e.target.value)}
+        placeholder="Valor máximo de salário"
+      />
+    </SalaryFilterContainer>,
+    <FilterInput
+      value={searchValue}
+      onChange={e => setSearchValue(e.target.value)}
+      placeholder="Status do funcionário"
+    />,
+    <FilterInput
+      value={searchValue}
+      onChange={e => setSearchValue(e.target.value)}
+      placeholder="UF do funcionário"
+    />,
+    <FilterInput
+      value={searchValue}
+      onChange={e => setSearchValue(e.target.value)}
+      placeholder="Data de cadastro do funcionário"
+    />,
+  ];
 
   return (
     <Container>
@@ -186,7 +276,7 @@ const Dashboard: React.FC = () => {
             </FilterButton>
           </FilterButtonsContainer>
           <FilterInputContainer>
-            <Input />
+            {filter !== -1 && filterInputs[filter]}
             {filter !== -1 ? (
               <Send>Filtrar</Send>
             ) : (
