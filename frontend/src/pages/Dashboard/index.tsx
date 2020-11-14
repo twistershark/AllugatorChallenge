@@ -232,7 +232,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <SideMenu />
+      <SideMenu selected />
       <ContentContainer>
         <FilterMenu>
           <FilterTitle>Filtrar por:</FilterTitle>

@@ -7,15 +7,21 @@ import Button from '../Button';
 
 import logoImg from '../../assets/logo.png';
 
-const SideMenu: React.FC = () => {
+interface Props {
+  selected?: boolean;
+}
+
+const SideMenu: React.FC<Props> = ({ selected }) => {
   return (
     <Container>
       <Logo src={logoImg} />
       <SideMenuButtons>
-        <Button selected iconName="apps-outline">
+        <Button route="/" selected={selected} iconName="apps-outline">
           Painel
         </Button>
-        <Button iconName="person-outline">Cadastro</Button>
+        <Button route="/signup" selected={selected} iconName="person-outline">
+          Cadastro
+        </Button>
       </SideMenuButtons>
       <SideMenuExitButton>
         <IoIosArrowBack size={16} fill="#fff" />
