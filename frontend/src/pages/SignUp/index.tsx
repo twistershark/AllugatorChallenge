@@ -53,7 +53,18 @@ const SignUp: React.FC = () => {
       }
     }
 
-    createNewCollaborator();
+    if (
+      name.length &&
+      CPF.length === 11 &&
+      job.length &&
+      salary.length &&
+      UF.length === 2 &&
+      signUpDate.length
+    ) {
+      createNewCollaborator();
+    } else {
+      toast('Preencha todos os dados corretamente!', { autoClose: 3000 });
+    }
   }, [name, CPF, job, salary, UF, status, signUpDate]);
 
   return (
@@ -65,23 +76,40 @@ const SignUp: React.FC = () => {
 
         <InputContainer>
           <InputName>Nome:</InputName>
-          <InputField value={name} onChange={e => setName(e.target.value)} />
+          <InputField
+            value={name}
+            required
+            placeholder="Aaron Aaby"
+            onChange={e => setName(e.target.value)}
+          />
         </InputContainer>
 
         <InputContainer>
           <InputName>CPF:</InputName>
-          <InputField value={CPF} onChange={e => setCPF(e.target.value)} />
+          <InputField
+            value={CPF}
+            required
+            placeholder="00011122234"
+            onChange={e => setCPF(e.target.value)}
+          />
         </InputContainer>
 
         <InputContainer>
           <InputName>Cargo:</InputName>
-          <InputField value={job} onChange={e => setJob(e.target.value)} />
+          <InputField
+            value={job}
+            required
+            placeholder="PO Sr"
+            onChange={e => setJob(e.target.value)}
+          />
         </InputContainer>
 
         <InputContainer>
           <InputName>Salário:</InputName>
           <InputField
             value={salary}
+            required
+            placeholder="325"
             onChange={e => setSalary(e.target.value)}
           />
         </InputContainer>
@@ -90,6 +118,8 @@ const SignUp: React.FC = () => {
           <InputName>UF:</InputName>
           <InputField
             value={UF}
+            required
+            placeholder="MG"
             onChange={e => setUF(e.target.value.toUpperCase())}
           />
         </InputContainer>
@@ -123,6 +153,7 @@ const SignUp: React.FC = () => {
           <InputField
             value={signUpDate}
             type="date"
+            required
             onChange={e => setSignUpDate(e.target.value)}
           />
         </InputContainer>

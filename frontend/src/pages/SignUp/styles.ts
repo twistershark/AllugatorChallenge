@@ -47,7 +47,7 @@ export const InputField = styled.input`
 
   &::placeholder {
     font-size: 0.9rem;
-    color: #969cb3;
+    color: #c8c8c8;
   }
 
   &:focus {
