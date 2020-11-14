@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
 interface filterProps {
@@ -18,25 +18,25 @@ export const ContentContainer = styled.div`
 export const FilterMenu = styled.section`
   background: #fff;
   border-radius: 8px;
-  height: 12rem;
+  height: 11rem;
   width: 100%;
   padding-left: 15rem;
+  padding-right: 1rem;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   box-shadow: 1px 2px 8px #d1d1d1;
 `;
 
 export const FilterTitle = styled.h1`
   margin-top: 8px;
-  font-size: 1.5rem;
+  font-size: 20px;
   color: #10cf58;
 `;
 
 export const FilterButtonsContainer = styled.div`
-  margin-top: 16px;
+  margin-top: 12px;
   display: flex;
   flex-direction: row;
 `;
@@ -46,6 +46,7 @@ export const FilterButton = styled.button<filterProps>`
   background: #fff;
   height: 2.5rem;
   padding: 0.5rem;
+  width: 150px;
   color: #969cb3;
   transition: background-color 400ms;
 
@@ -61,13 +62,71 @@ export const FilterButton = styled.button<filterProps>`
     color: ${shade(0.4, '#10cf58')};
     border-color: #10cf58;
   }
+
+  ${props =>
+    props.selected &&
+    css`
+      background: #8ef5b5;
+      color: ${shade(0.4, '#10cf58')};
+      border-color: #10cf58;
+    `}
 `;
 
-export const FilterInputContainer = styled.div``;
+export const FilterInputContainer = styled.div`
+  margin-top: 1rem;
+  padding: 0 6rem;
 
-export const FilterInput = styled.input``;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-export const Send = styled.button``;
+export const FilterInput = styled.input`
+  background: #f0f0f5;
+  margin: 0 20px;
+  width: 100%;
+  border-radius: 8px;
+  border: 0;
+  padding: 16px 24px;
+  font-size: 1rem;
+  color: #10cf58;
+
+  &::placeholder {
+    font-size: 0.9rem;
+    color: #969cb3;
+  }
+
+  &:focus {
+    border: 2px solid #10cf58;
+  }
+`;
+
+export const SalaryFilterContainer = styled.div`
+  display: flex;
+`;
+
+export const Send = styled.button`
+  width: 10%;
+  background: #8ef5b5;
+  border: none;
+  border-radius: 24px;
+  height: 3rem;
+  text-align: center;
+  transition: background-color 400ms;
+
+  color: #363f5f;
+  font-size: 1rem;
+  font-weight: bold;
+
+  &:hover {
+    background: #10cf58;
+  }
+`;
+
+export const NoFilterSelectedText = styled.h4`
+  margin-top: 20px;
+  color: #969cb3;
+`;
 
 export const TableContainer = styled.section`
   margin-top: 8px;
