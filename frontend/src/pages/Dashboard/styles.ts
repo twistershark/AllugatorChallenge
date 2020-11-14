@@ -106,7 +106,7 @@ export const SalaryFilterContainer = styled.div`
 `;
 
 export const Send = styled.button`
-  width: 10%;
+  width: 20%;
   background: #8ef5b5;
   border: none;
   border-radius: 24px;

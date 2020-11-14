@@ -34,7 +34,9 @@ interface Collaborator {
 }
 
 const Dashboard: React.FC = () => {
-  const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
+  const [collaborators, setCollaborators] = useState<
+    Collaborator[] | undefined
+  >([]);
   const [filter, setFilter] = useState(-1);
   const [searchValue, setSearchValue] = useState('');
   const [minSalary, setMinSalary] = useState('');
@@ -57,22 +59,24 @@ const Dashboard: React.FC = () => {
     loadData();
   }, []);
 
-  // const loadAllCollaborators = useCallback(() => {
-  //   async function loadData() {
-  //     const response = await api.get('/');
+  useEffect(() => {
+    async function loadData() {
+      const response = await api.get('/');
 
-  //     const collaboratorsFormatted = response.data.map(
-  //       (collaborator: Collaborator) => ({
-  //         ...collaborator,
-  //         formattedSallary: formatValue(collaborator.salary),
-  //       }),
-  //     );
+      const collaboratorsFormatted = response.data.map(
+        (collaborator: Collaborator) => ({
+          ...collaborator,
+          formattedSallary: formatValue(collaborator.salary),
+        }),
+      );
 
-  //     setCollaborators(collaboratorsFormatted);
-  //   }
+      setCollaborators(collaboratorsFormatted);
+    }
 
-  //   loadData();
-  // }, []);
+    if (filter === -1) {
+      loadData();
+    }
+  }, [filter]);
 
   const handleSetFilter = useCallback(
     number => {
@@ -86,99 +90,100 @@ const Dashboard: React.FC = () => {
     [filter],
   );
 
-  // const loadFilteredData = useCallback(() => {
-  //   async function loadData() {
-  //     // const response = await api.get('/list', {
-  //     //   params: { [`${param}`]: value },
-  //     // });
+  const loadFilteredData = useCallback(
+    param => {
+      async function loadData() {
+        const response = await api.get('/list', {
+          params: { [`${param}`]: searchValue },
+        });
 
-  //     const response = await api.get('/list', {
-  //       params: {
-  //         name: searchValue,
-  //         cpf: '',
-  //         job: '',
-  //         min: '',
-  //         max: '',
-  //         status: '',
-  //         uf: '',
-  //         signUpDate: '',
-  //       },
-  //     });
+        if (param === 'uf') {
+          const collaboratorsFormatted = response.data.arrayCollaborators.map(
+            (collaborator: Collaborator) => ({
+              ...collaborator,
+              formattedSallary: formatValue(collaborator.salary),
+            }),
+          );
 
-  //     const collaboratorsFormatted = response.data.map(
-  //       (collaborator: Collaborator) => ({
-  //         ...collaborator,
-  //         formattedSallary: formatValue(collaborator.salary),
-  //       }),
-  //     );
+          setCollaborators(collaboratorsFormatted);
+        } else {
+          const collaboratorsFormatted = response.data.map(
+            (collaborator: Collaborator) => ({
+              ...collaborator,
+              formattedSallary: formatValue(collaborator.salary),
+            }),
+          );
 
-  //     setCollaborators(collaboratorsFormatted);
-  //   }
-  //   loadData();
-  // }, [searchValue]);
+          setCollaborators(collaboratorsFormatted);
+        }
+      }
+      loadData();
+    },
+    [searchValue],
+  );
 
-  // const findByCPF = useCallback((cpf: string) => {
-  //   async function loadData() {
-  //     const response = await api.get(`/list/${cpf}`);
+  const findByCPF = useCallback((cpf: string) => {
+    async function loadData() {
+      const response = await api.get(`${cpf}`);
 
-  //     const collaboratorsFormatted = response.data.map(
-  //       (collaborator: Collaborator) => ({
-  //         ...collaborator,
-  //         formattedSallary: formatValue(collaborator.salary),
-  //       }),
-  //     );
+      const collaboratorsFormatted = [
+        {
+          ...response.data,
+          formattedSallary: formatValue(response.data.salary),
+        },
+      ];
 
-  //     setCollaborators(collaboratorsFormatted);
-  //   }
-  //   loadData();
-  // }, []);
+      setCollaborators(collaboratorsFormatted);
+    }
+    loadData();
+  }, []);
 
-  // const findBySalary = useCallback((min: string, max: string) => {
-  //   async function loadData() {
-  //     const response = await api.get('/list', {
-  //       params: { min, max },
-  //     });
+  const findBySalary = useCallback((min: string, max: string) => {
+    async function loadData() {
+      const response = await api.get('/list', {
+        params: { min, max },
+      });
 
-  //     const collaboratorsFormatted = response.data.map(
-  //       (collaborator: Collaborator) => ({
-  //         ...collaborator,
-  //         formattedSallary: formatValue(collaborator.salary),
-  //       }),
-  //     );
+      const collaboratorsFormatted = response.data.map(
+        (collaborator: Collaborator) => ({
+          ...collaborator,
+          formattedSallary: formatValue(collaborator.salary),
+        }),
+      );
 
-  //     setCollaborators(collaboratorsFormatted);
-  //   }
-  //   loadData();
-  // }, []);
+      setCollaborators(collaboratorsFormatted);
+    }
+    loadData();
+  }, []);
 
-  // function handleSearchWithFilter() {
-  //   switch (filter) {
-  //     case 0:
-  //       loadFilteredData('name', searchValue);
-  //       break;
-  //     case 1:
-  //       findByCPF(searchValue);
-  //       break;
-  //     case 2:
-  //       loadFilteredData('job', searchValue);
-  //       break;
-  //     case 3:
-  //       findBySalary(minSalary, maxSalary);
-  //       break;
-  //     case 4:
-  //       loadFilteredData('status', searchValue);
-  //       break;
-  //     case 5:
-  //       loadFilteredData('uf', searchValue);
-  //       break;
-  //     case 6:
-  //       loadFilteredData('signUpDate', searchValue);
-  //       break;
-  //     default: {
-  //       loadAllCollaborators();
-  //     }
-  //   }
-  // }
+  function handleSearchWithFilter() {
+    switch (filter) {
+      case 0:
+        loadFilteredData('name');
+        break;
+      case 1:
+        findByCPF(searchValue);
+        break;
+      case 2:
+        loadFilteredData('job');
+        break;
+      case 3:
+        findBySalary(minSalary, maxSalary);
+        break;
+      case 4:
+        loadFilteredData('status');
+        break;
+      case 5:
+        loadFilteredData('uf');
+        break;
+      case 6:
+        loadFilteredData('signUpDate');
+        break;
+      default: {
+        setFilter(-1);
+      }
+    }
+  }
 
   const filterInputs = [
     <FilterInput
@@ -278,7 +283,7 @@ const Dashboard: React.FC = () => {
           <FilterInputContainer>
             {filter !== -1 && filterInputs[filter]}
             {filter !== -1 ? (
-              <Send>Filtrar</Send>
+              <Send onClick={handleSearchWithFilter}>Filtrar</Send>
             ) : (
               <NoFilterSelectedText>
                 Nenhum filtro selecionado.
@@ -302,17 +307,18 @@ const Dashboard: React.FC = () => {
             </thead>
 
             <tbody>
-              {collaborators.map(collaborator => (
-                <tr key={collaborator.id}>
-                  <td>{collaborator.name}</td>
-                  <td>{collaborator.cpf}</td>
-                  <td>{collaborator.job}</td>
-                  <td>{collaborator.formattedSallary}</td>
-                  <td>{collaborator.status}</td>
-                  <td>{collaborator.uf}</td>
-                  <td>{collaborator.signUpDate}</td>
-                </tr>
-              ))}
+              {collaborators &&
+                collaborators.map(collaborator => (
+                  <tr key={collaborator.id}>
+                    <td>{collaborator.name}</td>
+                    <td>{collaborator.cpf}</td>
+                    <td>{collaborator.job}</td>
+                    <td>{collaborator.formattedSallary}</td>
+                    <td>{collaborator.status}</td>
+                    <td>{collaborator.uf}</td>
+                    <td>{collaborator.signUpDate}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </TableContainer>
