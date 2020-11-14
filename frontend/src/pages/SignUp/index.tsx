@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { useHistory } from 'react-router-dom';
 import {
   Container,
   FormContainer,
@@ -24,8 +25,6 @@ const SignUp: React.FC = () => {
   const [UF, setUF] = useState('');
   const [status, setStatus] = useState('');
   const [signUpDate, setSignUpDate] = useState('');
-
-  const history = useHistory();
 
   const handleFormSend = useCallback(() => {
     async function createNewCollaborator() {
@@ -50,12 +49,12 @@ const SignUp: React.FC = () => {
         setStatus('');
         setSignUpDate('');
 
-        history.push('/');
+        toast('Funcionário cadastrado', { autoClose: 3000 });
       }
     }
 
     createNewCollaborator();
-  }, [name, CPF, job, salary, UF, status, signUpDate, history]);
+  }, [name, CPF, job, salary, UF, status, signUpDate]);
 
   return (
     <Container>
@@ -129,6 +128,7 @@ const SignUp: React.FC = () => {
         </InputContainer>
         <SendButton onClick={handleFormSend}>Cadastrar</SendButton>
       </FormContainer>
+      <ToastContainer autoClose={3000} />
     </Container>
   );
 };
