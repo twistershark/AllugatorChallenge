@@ -176,3 +176,14 @@ export const TableContainer = styled.section`
     }
   }
 `;
+
+export const DeleteButton = styled.button`
+  background: none;
+  border: none;
+
+  &:hover {
+    svg {
+      color: #10cf58;
+    }
+  }
+`;

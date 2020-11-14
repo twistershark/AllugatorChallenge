@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { IoIosTrash } from 'react-icons/io';
 
 import {
   Container,
@@ -13,6 +14,7 @@ import {
   Send,
   NoFilterSelectedText,
   TableContainer,
+  DeleteButton,
 } from './styles';
 
 import SideMenu from '../../components/SideMenu';
@@ -230,6 +232,18 @@ const Dashboard: React.FC = () => {
     />,
   ];
 
+  const handleDelete = useCallback(
+    (cpf: string) => {
+      async function deleteCollaborator() {
+        await api.delete(`/${cpf}`);
+
+        setCollaborators(collaborators?.filter(col => col.cpf !== cpf));
+      }
+      deleteCollaborator();
+    },
+    [collaborators],
+  );
+
   return (
     <Container>
       <SideMenu selected />
@@ -303,6 +317,7 @@ const Dashboard: React.FC = () => {
                 <th>Status</th>
                 <th>UF</th>
                 <th>Cadastrado</th>
+                <th>Excluir</th>
               </tr>
             </thead>
 
@@ -317,6 +332,13 @@ const Dashboard: React.FC = () => {
                     <td>{collaborator.status}</td>
                     <td>{collaborator.uf}</td>
                     <td>{collaborator.signUpDate}</td>
+                    <td>
+                      <DeleteButton
+                        onClick={() => handleDelete(collaborator.cpf)}
+                      >
+                        <IoIosTrash size={20} />
+                      </DeleteButton>
+                    </td>
                   </tr>
                 ))}
             </tbody>
