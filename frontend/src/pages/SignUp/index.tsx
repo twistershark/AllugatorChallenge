@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 
+import { useHistory } from 'react-router-dom';
 import {
   Container,
   FormContainer,
@@ -13,6 +14,8 @@ import {
 
 import SideMenu from '../../components/SideMenu';
 
+import api from '../../services/api';
+
 const SignUp: React.FC = () => {
   const [name, setName] = useState('');
   const [CPF, setCPF] = useState('');
@@ -21,6 +24,38 @@ const SignUp: React.FC = () => {
   const [UF, setUF] = useState('');
   const [status, setStatus] = useState('');
   const [signUpDate, setSignUpDate] = useState('');
+
+  const history = useHistory();
+
+  const handleFormSend = useCallback(() => {
+    async function createNewCollaborator() {
+      const newCollaborator = {
+        name,
+        cpf: CPF,
+        job,
+        salary: Number(salary),
+        uf: UF,
+        status,
+        signUpDate,
+      };
+
+      const response = await api.post('/', newCollaborator);
+
+      if (response.data) {
+        setName('');
+        setCPF('');
+        setJob('');
+        setSalary('');
+        setUF('');
+        setStatus('');
+        setSignUpDate('');
+
+        history.push('/');
+      }
+    }
+
+    createNewCollaborator();
+  }, [name, CPF, job, salary, UF, status, signUpDate, history]);
 
   return (
     <Container>
@@ -92,7 +127,7 @@ const SignUp: React.FC = () => {
             onChange={e => setSignUpDate(e.target.value)}
           />
         </InputContainer>
-        <SendButton>Cadastrar</SendButton>
+        <SendButton onClick={handleFormSend}>Cadastrar</SendButton>
       </FormContainer>
     </Container>
   );
