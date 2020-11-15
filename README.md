@@ -1,159 +1,225 @@
-<img alt="Challenge" src="https://storage.googleapis.com/golden-wind/bootcamp-gostack/header-desafios.png" />
-
-<h3 align="center">
-  Teste técnico da Allugator
-</h3>
-
-<blockquote align="center">Desenvolvido por Paulo Victor!</blockquote>
+<h1 align="center">Desafio técnico - Allugator</h1>
 
 <p align="center">
-  <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#calendar-entrega">Entrega</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/1.png" />
+
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/2.png" />
 </p>
 
-## :rocket: Sobre o desafio
 
-Nesse desafio, você vai estar criando uma nova aplicação para aprender novas coisas e treinar o que você aprendeu até agora no Node.js junto ao TypeScript, incluindo o uso de banco de dados com o TypeORM, e relacionamentos ManyToMany!
+---
+# 📑 Índice
 
-Essa será uma aplicação que deve permitir a criação de clientes, produtos e pedidos, onde o cliente pode gerar novos pedidos de compra de certos produtos, como um pequeno e-commerce.
+- [Sobre](#-sobre)
+- [Tecnologias](#-tecnologias)
+- [Pré-requisitos](#-pré-requisitos)
+- [Como utilizar o projeto](#-como-utilizar-o-projeto)
+- [Testes](#testes)
+- [Autor](#-autor)
+---
 
-### Template da aplicação
+## 📋 Sobre
 
-Para te ajudar nesse desafio, criamos para você um modelo que você deve utilizar como um template do Github.
-
-O template está disponível na seguinte url: **[Acessar Template](https://github.com/Rocketseat/gostack-template-typeorm-relations)**
-
-**Dica**: Caso não saiba utilizar repositórios do Github como template, temos um guia em **[nosso FAQ](https://github.com/Rocketseat/bootcamp-gostack-desafios/tree/master/faq-desafios).**
-
-Agora navegue até a pasta criada e abra no Visual Studio Code, lembre-se de executar o comando `yarn` no seu terminal para instalar todas as dependências.
-
-### Rotas da aplicação
-
-Agora que você já está com o template clonado e pronto para continuar, você deve verificar os arquivos da pasta `src` e completar onde não possui código com o código para atingir os objetivos de cada rota.
-
-- **`POST /customers`**: A rota deve receber `name` e `email` dentro do corpo da requisição, sendo o `name` o nome do cliente a ser cadastrado. Ao cadastrar um novo cliente, ele deve ser armazenado dentro do seu banco de dados e deve ser retornado o cliente criado. Ao cadastrar no banco de dados, na tabela `customers` deverá possuir os campos `name`, `email`, `created_at`, `updated_at`.
-
-**Dica**: Antes de criar um novo cliente, sempre verifique se já existe um cliente com o mesmo e-mail. Caso ela exista, retorne um erro.
-
-- **`POST /products`**: Essa rota deve receber `name`, `price` e `quantity` dentro do corpo da requisição, sendo o `name` o nome do produto a ser cadastrado, `price` o valor unitário e `quantity` a quantidade existente em estoque do produto. Com esses dados devem ser criados no banco de dados um novo produto com os seguintes campos: `name`, `price`, `quantity`, `created_at`, `updated_at`.
-
-**Dica 1**: Antes de criar um novo produto, sempre verifique se já existe um produto com o mesmo nome. Caso ela exista, retorne um erro.
-
-**Dica 2**: Para o campo `price`, você pode utilizar o `type` como `decimal` na sua migration, passando também as propriedades `precision` e `scale`.
-
-- **`POST /orders/`**: Nessa rota você deve receber no corpo da requisição o `customer_id` e um array de products, contendo o `id` e a `quantity` que você deseja adicionar a um novo pedido. Aqui você deve cadastrar na tabela `order` um novo pedido, que estará relacionado ao `customer_id` informado, `created_at` e `updated_at` . Já na tabela `orders_products`, você deve armazenar o `product_id`, `order_id`, `price` e `quantity`, `created_at` e `updated_at`.
-
-**Dica 1**: Nessa funcionalidade, você precisará fazer um relacionamento de N:N entre produtos e pedidos, onde vários produtos podem estar em vários pedidos, com isso você deve sempre armazenar o valor do produto no momento da compra e a quantidade pedida na tabela pivô com nome de `orders_products`, essa tabela vai ter os campos `id`, `order_id`, `product_id`, `quantity`, `price`, `created_at` e `updated_at`. Para esse tipo de relacionamento, você pode verificar na documentação do TypeORM sobre [como fazer relacionamento muitos-para-muitos com propriedades customizadas](https://github.com/typeorm/typeorm/blob/master/docs/many-to-many-relations.md#many-to-many-relations-with-custom-properties).
-
-**Dica 2**: Além disso, você pode também utilizar o método de cascade do TypeORM, que irá adicionar na sua tabela `order_products` os produtos que você passar por parametro para a entidade de `orders` automaticamente, você pode saber mais sobre isso aqui: [Opção de cascade](https://github.com/typeorm/typeorm/blob/master/docs/relations.md#cascade-options)
-
-**Dica 3**: A sua requisição do insomnia deve enviar um JSON com o formato parecido com esse:
-
-```json
-{
-  "customer_id": "e26f0f2a-3ac5-4c21-bd22-671119adf4e9",
-  "products": [
-    {
-      "id": "ce0516f3-63ae-4048-9a8a-8b6662281efe",
-      "quantity": 5
-    },
-    {
-      "id": "82612f2b-3f31-40c6-803d-c2a95ef35e7c",
-      "quantity": 7
-    }
-  ]
-}
-```
-
-**Dica 4**: Uma chamada a essa rota deve retornar os dados do cliente, produtos do pedido e id do pedido, num formato parecido com o seguinte:
-
-```json
-{
-  "id": "5cbc4aa2-b3dc-43f9-b121-44c1e416fa92",
-  "created_at": "2020-05-11T07:09:48.767Z",
-  "updated_at": "2020-05-11T07:09:48.767Z",
-  "customer": {
-    "id": "e26f0f2a-3ac5-4c21-bd22-671119adf4e9",
-    "name": "Rocketseat",
-    "email": "oi@rocketseat.com.br",
-    "created_at": "2020-05-11T06:20:28.729Z",
-    "updated_at": "2020-05-11T06:20:28.729Z"
-  },
-  "order_products": [
-    {
-      "product_id": "ce0516f3-63ae-4048-9a8a-8b6662281efe",
-      "price": "1400.00",
-      "quantity": 5,
-      "order_id": "5cbc4aa2-b3dc-43f9-b121-44c1e416fa92",
-      "id": "265b6cbd-3ab9-421c-b358-c2e2b5b3b542",
-      "created_at": "2020-05-11T07:09:48.767Z",
-      "updated_at": "2020-05-11T07:09:48.767Z"
-    },
-    {
-      "product_id": "82612f2b-3f31-40c6-803d-c2a95ef35e7c",
-      "price": "500.00",
-      "quantity": 7,
-      "order_id": "5cbc4aa2-b3dc-43f9-b121-44c1e416fa92",
-      "id": "ae37bcd6-7be7-47b9-b277-afee35aab4e4",
-      "created_at": "2020-05-11T07:09:48.767Z",
-      "updated_at": "2020-05-11T07:09:48.767Z"
-    }
-  ]
-}
-```
-
-- **`GET /orders/:id`**: Essa rota deve retornar as informações de um pedido específico, com todas as informações que podem ser recuperadas através dos relacionamentos entre a tabela `orders`, `customers` e `orders_products`.
-
-**Dica**: Aqui você pode utilizar a opção [eager do TypeORM](https://github.com/typeorm/typeorm/blob/master/docs/eager-and-lazy-relations.md#eager-relations) ou passar a opção [relations](https://github.com/typeorm/typeorm/blob/master/docs/find-options.md) para o método findOne do TypeORM, informando os nomes das tabelas que você deseja buscar o relacionamento.
-
-### Links úteis
-
-- [Cascade option TypeORM](https://github.com/typeorm/typeorm/blob/master/docs/relations.md#cascade-options)
-- [Relacionamento many-to-many personalizado](https://github.com/typeorm/typeorm/blob/master/docs/many-to-many-relations.md#many-to-many-relations-with-custom-properties)
-- [Eager loading com TypeORM](https://github.com/typeorm/typeorm/blob/master/docs/eager-and-lazy-relations.md#eager-relations)
-- [Opções de relacionamentos do TypeORM](https://github.com/typeorm/typeorm/blob/master/docs/find-options.md)
-
-### Específicação dos testes
-
-Em cada teste, tem uma breve descrição no que sua aplicação deve cumprir para que o teste passe.
-
-Caso você tenha dúvidas quanto ao que são os testes, e como interpretá-los, dê uma olhada em **[nosso FAQ](https://github.com/Rocketseat/bootcamp-gostack-desafios/tree/master/faq-desafios).**
-
-Para esse desafio, temos os seguintes testes:
-
-<h4 align="center">
-  ⚠️ Antes de rodar os testes, crie um banco de dados com o nome "gostack_desafio09_tests" para que todos os testes possam executar corretamente ⚠️
-</h4>
-
-- **`should be able to create a new customer`**: Para que esse teste passe, sua aplicação deve permitir que um cliente seja criado, e retorne um json com o cliente criado.
-
-- **`should not be able to create a customer with one e-mail thats already registered`**: Para que esse teste passe, sua aplicação deve retornar um erro quando você tentar cadastrar um cliente com um e-mail que já esteja cadastrado no banco de dados.
-
-- **`should be able to create a new product`**: Para que esse teste passe, sua aplicação deve permitir que um produto seja criado, e retorne um json com o produto criado.
-
-- **`should not be able to create a duplicated product`**: Para que esse teste passe, sua aplicação deve retornar um erro quando você tentar cadastrar um produto com um nome que já esteja cadastrado no banco de dados.
-
-- **`should be able to create a new order`**: Para que esse teste passe, sua aplicação deve permitir que um pedido seja criado, e retorne um json com o todos os dados do pedido criado.
-
-- **`should not be able to create an order with a invalid customer`**: Para que esse teste passe, sua aplicação não deve permitir a criação de um novo pedido com um cliente que não existe no banco de dados, retornando um erro.
-
-- **`should not be able to create an order with invalid products`**: Para que esse teste passe, sua aplicação não deve permitir a criação de um novo pedido com um produtos que não existem no banco de dados, retornando um erro caso um ou mais dos produtos enviados não exista no banco de dados.
-
-- **`should not be able to create an order with products with insufficient quantities`**: Para que esse teste passe, sua aplicação não deve permitir a criação de um novo pedido com um produtos que não possuem quantidade disponível, retornando um erro caso um ou mais dos produtos enviados não possua a quantidade necessária.
-
-- **`should be able to subtract an product total quantity when it is ordered`**: Para que esse teste passe, sua aplicação deve permitir que, quando um novo pedido for criado, seja alterada a quantidade total dos produtos baseado na quantidade pedida.
-
-- **`should be able to list one specific order`**: Para que esse teste passe, você deve permitir que a rota `orders/:id` retorne um pedido, contendo todas as informações do pedido com o relacionamento de `customer` e `order_products`.
-
-## :calendar: Entrega
-
-Esse desafio deve ser entregue a partir da plataforma Skylab, envie o link do repositório que você fez suas alterações. Após concluir o desafio, fazer um post no Linkedin e postar o código no Github é uma boa forma de demonstrar seus conhecimentos e esforços para evoluir na sua carreira para oportunidades futuras.
-
-## :memo: Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Esse projeto foi desenvolvido como resposta ao teste técnico requisitado pela Allugator no seu processo seletivo. Decidi criar a API em NodeJS com Express e o Frontend com React.
+<br />
+Busquei organizar o backend de forma a permitir que fosse fácil de escalar e adicionar novas features.
+<br />
+Já no frontend, busquei fazer o melhor que pude no tempo disponibilizado. Meu objetivo era criar um layout bonito e eficiente que facilitasse o uso da aplicação.
 
 ---
 
-Feito com 💜 by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
+## 🚀 Tecnologias
+
+- [NodeJS](https://nodejs.org/en/)
+- [React](https://pt-br.reactjs.org/)
+- [Docker](https://www.docker.com/)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Jest](https://jestjs.io/)
+- [Styled Components](https://styled-components.com/)
+
+
+---
+
+## 🔧 Pré-requisitos
+
+- **NodeJS** versão 12 ou maior - Você pode encontrar as informações e arquivos necessários para instalação nesse [link](https://nodejs.org/en/).
+- **Yarn** - Com o NodeJS instalado, execute o seguinte comando no terminal para que o yarn seja instalado na sua máquina:
+  ```sh
+  $ npm install -g yarn
+  ```
+
+- **Docker** Caso ainda não tenha o Docker instalado na sua máquina, você pode seguir o seguinte tutorial para efetuar a instalação seguindo seu SO: [Link](https://www.notion.so/Instalando-Docker-6290d9994b0b4555a153576a1d97bee2)
+<br />
+- Com todos os requisitos acima instalados, vamos criar um container com a imagem do PostgreSQL que foi utilizado como Banco de Dados dessa API. Para isso, vamos executar o seguinte comando no terminal: 
+<br />
+  ```sh
+   sudo docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+  ```
+<br />
+Assim que o comando acima finalizar sua execução, é necessário criar um banco de dados com o nome "allugator". Para isso, utilizaremos uma ferramenta chamada **DBeaver** que pode ser encontrada para download nesse link: [DBeaver](https://dbeaver.io/download/)
+
+<br />
+
+Após a instalação do DBeaver, vamos criar uma conexão com nosso container do Docker.
+<br />
+Clique no ícone de tomada no canto esquerdo superior do DBeaver.
+
+<p align="center">
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver1.png" />
+</p>
+
+Selecione **Postgres** e depois clique em **next**
+
+<p align="center">
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver2.png" />
+</p>
+
+Preencha os campos de conexão com os seguintes dados:
+- Host: **localhost**
+- Database: **postgres**
+- Port: **5432**
+- Username: **postgres**
+- Password: **docker**
+
+<p align="center">
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver3.png" />
+</p>
+
+Agora selecione a opção **PostgreSQL** do menu acima e depois marque a caixa **Show all databases** e em seguida clique em Finish.
+
+<p align="center">
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver4.png" />
+</p>
+
+Vamos criar o banco de dados com o nome **allugator** agora. Para isso, clique com o botão direito em cima da conexão **postgres** que foi criada. Selecione **Create** e depois **Database**.
+<br />
+Na tela de criação de bando de dados, coloque os seguintes dados:
+- Database name: **allugator**
+<br/>
+e clique em **ok** 
+
+<p align="center">
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver5.png" />
+</p>
+
+---
+
+Com as dependências instaladas e com o nosso banco de dados **allugator** criado, clone esse repositório na sua máquina(caso não tenha clonado ainda) e acesse a pasta **backend**.
+
+Dentro da pasta **backend** execute o seguinte comando no terminal para instalar todas as libs de dependência da API:
+  ```sh
+  $ yarn
+  ```
+Feito isso, precisamos executar as migrations da API para que a tabela de *collaborators* seja criada no nosso BD. Para isso, vamos executar o seguinte comando no terminal:
+
+  ```sh
+  $ yarn typeorm migration:run 
+  ```
+
+Caso você tenha concluído todos os passos até aqui, já temos nossa aplicação clonada, com o banco de dados criado e todas as dependências do backend instaladas. Que tal importarmos os dados de exemplo do desafio no nosso banco de dados? Para isso, você precisa procurar pela tabela de collaborators.
+
+<p align="center">
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver6.png" />
+</p>
+
+Agora clique com o botão direito do mouse em cima da tabela **collaborators** e clique em **Import Data**. Na tela que aparecerá, selecione **CSV** e clique em **next**.
+
+<p align="center">
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver7.png" />
+</p>
+
+Navegue até a pasta **resources** desse projeto e selecione o arquivo chamado **db.csv**. Agora continue clicando em **next** em todas as telas que aparecerão. Por fim, aparecerá a seguinte tela. Clique em **Start**
+
+<p align="center">
+  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver8.png" />
+</p>
+
+### Pronto! Nosso backend já está pronto e configurado. Sempre que quisermos iniciar a API basta executar o seguinte comando no terminal na pasta backend:
+
+  ```sh
+  $ yarn dev:server 
+  ```
+### Agora vamos iniciar nossa aplicação web para consumir essa API. 
+
+Abra uma nova janela/aba do terminal, navegue até a pasta **frontend** e execute o seguinte comando para instalar todas as libs de dependência do frontend(executar apenas na primeira vez):
+
+  ```sh
+  $ yarn 
+  ```
+
+Agora podemos iniciar nosso frontend com o seguinte comando no terminal:
+  ```sh
+  $ yarn start
+  ```
+
+**Pronto! Aplicação rodando!**
+
+---
+## 🌟 Como utilizar o projeto
+
+```sh
+
+  # Caso ainda não tenha executado a API, entre na pasta backend e execute:
+  $ yarn dev:server
+
+  # Agora abra uma nova aba/janela do terminal, navegue até a pasta frontend e execute:
+  $ yarn start
+
+```
+
+### Rotas da aplicação
+
+
+- **`POST /collaborators`**: A rota deve receber `name`, `cpf`, `job`, `signUpDate`, `uf`, `salary`, `status` dentro do corpo da requisição, sendo o `name` _(string)_ o nome do funcionário a ser cadastrado, `cpf` _(string)_ seu CPF, `job` _(string)_ o seu cargo, `signUpDate` _(string)_ a sua data de cadastro, `uf` _(string)_ seu estado, `salary` seu salário _(number)_ e `status` _(string)_ como seu status. Caso o usuário já exista, seus dados serão atualizados com os informados na requisição. Será retornado o funcionário recém cadastrado.
+Exemplo dessa requisição:
+```json
+{
+	"name": "Paulo",
+	"cpf": "00011122238",
+	"job": "dev",
+	"signUpDate": "17/02/1996",
+	"uf": "GO",
+	"salary": 475.89,
+	"status": "INACTIVE"
+}
+```
+
+Exemplo de resposta da API:
+```json
+{
+  "name": "Paulo Updated",
+  "job": "dev",
+  "cpf": "00011122238",
+  "uf": "GO",
+  "salary": 475.89,
+  "status": "INACTIVE",
+  "signUpDate": "17/02/1996",
+  "id": "d030fd69-ae8b-4eac-9cef-56ce75418c5e",
+  "created_at": "2020-11-13T04:28:48.082Z",
+  "updated_at": "2020-11-13T04:28:48.082Z"
+}
+```
+
+- **`GET /collaborators`**: A rota retorna todos os funcionários cadastrados.
+
+- **`GET /collaborators/:cpf`**: A rota recebe o CPF do funcionário como parâmetro e o retorna como response.
+
+- **`DELETE /collaborators/:cpf`**: A rota recebe o CPF do funcionário como parâmetro e o deleta do banco de dados.
+
+- **`GET /collaborators/list`**: Essa rota recebe query params como filtro dos funcionários que serão retornados. As possíveis querys são: 
+`name` para procurar por nome, `job` para procurar por cargo, `signUpDate` para procurar por data de cadastro, `uf` para procurar por unidade federativa, `min` e `max` para procurar funcionários dentro dessa faixa salarial e `status` para procurar por status.
+
+## 🏗 Testes
+
+Para executar a suíte de testes, basta acessar a pasta _backend_ e tendo todas as dependências instaladas(Conferir _Pré-requisitos_), executar o seguinte comando no terminal:
+
+```sh
+yarn test
+```
+
+## 🤓 Autor
+
+👤 **Paulo Victor da Silva**
+
+* Github: [@twistershark](https://github.com/twistershark)
+* LinkedIn: [@paulovictorsilva](https://linkedin.com/in/paulovictorsilva)
