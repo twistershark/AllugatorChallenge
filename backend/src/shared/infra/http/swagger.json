@@ -3,10 +3,38 @@
     "openapi": "3.0.0",
     "info": {
       "version": "1.0.0",
-      "title": "The Title of your project",
-      "description": "A description of your project",
-      "servers": ["http://localhost:3333"]
+      "title": "Desafio Técnico do Processo Seletivo da Allugator",
+      "description": "API RESTFul construída com NodeJS e Express",
+      "servers": ["http://localhost:3333/collaborators"]
     }
   },  
-  "apis": ["server.ts"]
+  "apis": ["**/*.routes.ts"],
+  "schemas": {
+    "Collaborator": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "CPF": {
+          "type": "string"
+        },
+        "Job": {
+          "type": "string"
+        },
+        "SignUpDate": {
+          "type": "string"
+        },
+        "UF": {
+          "type": "string"
+        },
+        "Salary": {
+          "type": "number"
+        },
+        "Status": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }
