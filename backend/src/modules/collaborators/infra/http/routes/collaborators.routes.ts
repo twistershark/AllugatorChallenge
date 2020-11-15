@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { celebrate, Segments, Joi } from 'celebrate';
 
 import CollaboratorsController from '../controllers/CollaboratorsController';
 import ShowCollaboratorByCPFController from '../controllers/ShowCollaboratorByCPFController';
@@ -14,18 +15,19 @@ const listCollaboratorsController = new ListCollaboratorsController();
 
 // Create, Read, Update and Delete Collaborator
 
-/**
- * @swagger
- * /collaborators:
- *  get:
- *    description: Get all collaborators
- *    responses:
- *      200:
- *        description: Success
- */
 
 collaboratorsRouter.get('/', collaboratorsController.index);
-collaboratorsRouter.post('/', collaboratorsController.create);
+collaboratorsRouter.post('/', celebrate({
+  [Segments.BODY]: {
+    name: Joi.string().required(),
+    cpf: Joi.string().required().length(11),
+    job: Joi.string().required(),
+    signUpDate: Joi.string().required().length(10),
+    uf: Joi.string().required().length(2),
+    salary: Joi.number().required(),
+    status: Joi.string().required(),
+  }
+}),collaboratorsController.create);
 collaboratorsRouter.delete('/:cpf', collaboratorsController.delete);
 
 // List collaborators by query params

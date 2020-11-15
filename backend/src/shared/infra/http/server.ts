@@ -3,6 +3,7 @@ import '@shared/container';
 
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
+import { errors } from 'celebrate';
 import cors from 'cors';
 import AppError from '@shared/errors/AppError';
 
@@ -21,6 +22,8 @@ const swaggerDocs = swaggerJsDoc(swaggerDocument);
 app.use(cors());
 app.use(express.json());
 app.use(routes);
+
+app.use(errors());
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
