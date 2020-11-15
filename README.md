@@ -1,9 +1,9 @@
 <h1 align="center">Desafio técnico - Allugator</h1>
 
 <p align="center">
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/1.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/1.png" />
 
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/2.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/2.png" />
 </p>
 
 
@@ -65,13 +65,13 @@ Após a instalação do DBeaver, vamos criar uma conexão com nosso container do
 Clique no ícone de tomada no canto esquerdo superior do DBeaver.
 
 <p align="center">
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver1.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver1.png" />
 </p>
 
 Selecione **Postgres** e depois clique em **next**
 
 <p align="center">
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver2.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver2.png" />
 </p>
 
 Preencha os campos de conexão com os seguintes dados:
@@ -82,13 +82,13 @@ Preencha os campos de conexão com os seguintes dados:
 - Password: **docker**
 
 <p align="center">
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver3.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver3.png" />
 </p>
 
 Agora selecione a opção **PostgreSQL** do menu acima e depois marque a caixa **Show all databases** e em seguida clique em Finish.
 
 <p align="center">
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver4.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver4.png" />
 </p>
 
 Vamos criar o banco de dados com o nome **allugator** agora. Para isso, clique com o botão direito em cima da conexão **postgres** que foi criada. Selecione **Create** e depois **Database**.
@@ -99,7 +99,7 @@ Na tela de criação de bando de dados, coloque os seguintes dados:
 e clique em **ok** 
 
 <p align="center">
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver5.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver5.png" />
 </p>
 
 ---
@@ -119,19 +119,19 @@ Feito isso, precisamos executar as migrations da API para que a tabela de *colla
 Caso você tenha concluído todos os passos até aqui, já temos nossa aplicação clonada, com o banco de dados criado e todas as dependências do backend instaladas. Que tal importarmos os dados de exemplo do desafio no nosso banco de dados? Para isso, você precisa procurar pela tabela de collaborators.
 
 <p align="center">
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver6.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver6.png" />
 </p>
 
 Agora clique com o botão direito do mouse em cima da tabela **collaborators** e clique em **Import Data**. Na tela que aparecerá, selecione **CSV** e clique em **next**.
 
 <p align="center">
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver7.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver7.png" />
 </p>
 
 Navegue até a pasta **resources** desse projeto e selecione o arquivo chamado **db.csv**. Agora continue clicando em **next** em todas as telas que aparecerão. Por fim, aparecerá a seguinte tela. Clique em **Start**
 
 <p align="center">
-  <img alt="Challenge" height="600" src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver8.png" />
+  <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/instructions/dbeaver8.png" />
 </p>
 
 ### Pronto! Nosso backend já está pronto e configurado. Sempre que quisermos iniciar a API basta executar o seguinte comando no terminal na pasta backend:
@@ -187,7 +187,7 @@ Exemplo dessa requisição:
 Exemplo de resposta da API:
 ```json
 {
-  "name": "Paulo Updated",
+  "name": "Paulo",
   "job": "dev",
   "cpf": "00011122238",
   "uf": "GO",
