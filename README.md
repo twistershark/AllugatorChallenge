@@ -121,11 +121,35 @@ Dentro da pasta **backend** execute o seguinte comando no terminal para instalar
   ```sh
   $ yarn
   ```
+
+Agora precisamos configurar nosso arquivo de conexão com o banco de dados. Renomeie o arquivo **ormconfig.EXAMPLE.json** para **ormconfig.json**. Preencha o arquivo json com as informações do postgres que utilizamos na criação do container no Docker. Caso você tenha seguido todos os passos sem fazer alterações, seu json deverá estar dessa forma:
+
+```json
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "docker",
+  "database": "allugator",
+  "migrations": [
+    "./src/shared/infra/typeorm/migrations/*.ts"
+  ],
+  "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/shared/infra/typeorm/migrations"
+  }
+}
+```
+__Caso tenha feito alguma alteração em algum passo durante o processo de instalação, faça as devidas alterações aqui e nos outros passos.__
+
 Feito isso, precisamos executar as migrations da API para que a tabela de *collaborators* seja criada no nosso BD. Para isso, vamos executar o seguinte comando no terminal:
 
   ```sh
   $ yarn typeorm migration:run 
   ```
+
+---
 
 Caso você tenha concluído todos os passos até aqui, já temos nossa aplicação clonada, com o banco de dados criado e todas as dependências do backend instaladas. Que tal importarmos os dados de exemplo do desafio no nosso banco de dados? Para isso, você precisa procurar pela tabela de collaborators.
 
