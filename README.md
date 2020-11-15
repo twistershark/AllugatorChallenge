@@ -1,4 +1,4 @@
-<h1 align="center">Desafio técnico - Allugator</h1>
+<h1 align="center">Desafio técnico - Allugator 🐊</h1>
 
 <p align="center">
   <img alt="Challenge"  src="https://github.com/twistershark/AllugatorChallenge/blob/main/assets/1.png" />
@@ -52,9 +52,11 @@ Já no frontend, busquei fazer o melhor que pude no tempo disponibilizado. Meu o
 <br />
 - Com todos os requisitos acima instalados, vamos criar um container com a imagem do PostgreSQL que foi utilizado como Banco de Dados dessa API. Para isso, vamos executar o seguinte comando no terminal: 
 <br />
+
   ```sh
-   sudo docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+   $ sudo docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
   ```
+
 <br />
 Assim que o comando acima finalizar sua execução, é necessário criar um banco de dados com o nome "allugator". Para isso, utilizaremos uma ferramenta chamada **DBeaver** que pode ser encontrada para download nesse link: [DBeaver](https://dbeaver.io/download/)
 
