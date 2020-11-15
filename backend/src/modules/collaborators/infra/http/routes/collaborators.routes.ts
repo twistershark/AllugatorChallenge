@@ -13,6 +13,17 @@ const listCollaboratorsController = new ListCollaboratorsController();
 // Routes
 
 // Create, Read, Update and Delete Collaborator
+
+/**
+ * @swagger
+ * /collaborators:
+ *  get:
+ *    description: Get all collaborators
+ *    responses:
+ *      200:
+ *        description: Success
+ */
+
 collaboratorsRouter.get('/', collaboratorsController.index);
 collaboratorsRouter.post('/', collaboratorsController.create);
 collaboratorsRouter.delete('/:cpf', collaboratorsController.delete);

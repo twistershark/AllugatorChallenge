@@ -72,7 +72,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
 
   public async findByUF(uf: string): Promise<IResponseFindByUFDTO | undefined> {
     const [collaborators, amount] = await this.ormRepository.findAndCount({
-      where: { uf },
+      where: { uf: ILike(`%${uf}%`) },
     });
 
     const res = {
@@ -98,7 +98,7 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
     status: string,
   ): Promise<Collaborator[] | undefined> {
     const collaborators = await this.ormRepository.find({
-      where: { status },
+      where: { status: ILike(`%${status}%`) },
     });
 
     return collaborators;
