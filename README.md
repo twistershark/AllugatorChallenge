@@ -122,7 +122,7 @@ Dentro da pasta **backend** execute o seguinte comando no terminal para instalar
   $ yarn
   ```
 
-Agora precisamos configurar nosso arquivo de conexão com o banco de dados. Renomeie o arquivo **ormconfig.EXAMPLE.json** para **ormconfig.json**. Preencha o arquivo json com as informações do postgres que utilizamos na criação do container no Docker. Caso você tenha seguido todos os passos sem fazer alterações, seu json deverá estar dessa forma:
+Agora precisamos configurar nosso arquivo de conexão com o banco de dados. Renomeie o arquivo **ormconfig.EXAMPLE.json** que está na pasta backend para **ormconfig.json**. Preencha o arquivo json com as informações do postgres que utilizamos na criação do container no Docker. Caso você tenha seguido todos os passos sem fazer alterações, seu json deverá estar dessa forma:
 
 ```json
 {
