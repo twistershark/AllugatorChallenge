@@ -204,6 +204,7 @@ Agora podemos iniciar nosso frontend com o seguinte comando no terminal:
 
 ### Rotas da aplicação
 
+- **`GET /api-docs`**: Documentação da API feita usando o Swagger.
 
 - **`POST /collaborators`**: A rota deve receber `name`, `cpf`, `job`, `signUpDate`, `uf`, `salary`, `status` dentro do corpo da requisição, sendo o `name` _(string)_ o nome do funcionário a ser cadastrado, `cpf` _(string)_ seu CPF, `job` _(string)_ o seu cargo, `signUpDate` _(string)_ a sua data de cadastro, `uf` _(string)_ seu estado, `salary` seu salário _(number)_ e `status` _(string)_ como seu status. Caso o usuário já exista, seus dados serão atualizados com os informados na requisição. Será retornado o funcionário recém cadastrado.
 Exemplo dessa requisição:
