@@ -49,8 +49,11 @@ Já no frontend, busquei fazer o melhor que pude no tempo disponibilizado. Meu o
   ```
 
 - **Docker** Caso ainda não tenha o Docker instalado na sua máquina, você pode seguir o seguinte tutorial para efetuar a instalação seguindo seu SO: [Link](https://www.notion.so/Instalando-Docker-6290d9994b0b4555a153576a1d97bee2)
+
 <br />
+
 - Com todos os requisitos acima instalados, vamos criar um container com a imagem do PostgreSQL que foi utilizado como Banco de Dados dessa API. Para isso, vamos executar o seguinte comando no terminal: 
+
 <br />
 
   ```sh
@@ -58,12 +61,17 @@ Já no frontend, busquei fazer o melhor que pude no tempo disponibilizado. Meu o
   ```
 
 <br />
+
 Assim que o comando acima finalizar sua execução, é necessário criar um banco de dados com o nome "allugator". Para isso, utilizaremos uma ferramenta chamada **DBeaver** que pode ser encontrada para download nesse link: [DBeaver](https://dbeaver.io/download/)
 
 <br />
 
+---
+
 Após a instalação do DBeaver, vamos criar uma conexão com nosso container do Docker.
+
 <br />
+
 Clique no ícone de tomada no canto esquerdo superior do DBeaver.
 
 <p align="center">
@@ -94,10 +102,11 @@ Agora selecione a opção **PostgreSQL** do menu acima e depois marque a caixa *
 </p>
 
 Vamos criar o banco de dados com o nome **allugator** agora. Para isso, clique com o botão direito em cima da conexão **postgres** que foi criada. Selecione **Create** e depois **Database**.
+
 <br />
+
 Na tela de criação de bando de dados, coloque os seguintes dados:
 - Database name: **allugator**
-<br/>
 e clique em **ok** 
 
 <p align="center">
