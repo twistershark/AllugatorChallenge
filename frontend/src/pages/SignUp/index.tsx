@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import * as Yup from 'yup';
 import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,55 +18,75 @@ import SideMenu from '../../components/SideMenu';
 
 import api from '../../services/api';
 
+interface Errors {
+  errors: string[];
+}
+
 const SignUp: React.FC = () => {
   const [name, setName] = useState('');
-  const [CPF, setCPF] = useState('');
+  const [cpf, setCPF] = useState('');
   const [job, setJob] = useState('');
   const [salary, setSalary] = useState('');
-  const [UF, setUF] = useState('');
+  const [uf, setUF] = useState('');
   const [status, setStatus] = useState('');
   const [signUpDate, setSignUpDate] = useState('');
 
-  const handleFormSend = useCallback(() => {
-    async function createNewCollaborator() {
+  const handleFormSend = useCallback(async () => {
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome é obrigatório'),
+        cpf: Yup.string()
+          .required('CPF é obrigatório')
+          .length(11, 'CPF deve possuir 11 números'),
+        job: Yup.string().required('Cargo é obrigatório'),
+        signUpDate: Yup.string().required('Data de cadastro é obrigatório'),
+        uf: Yup.string()
+          .required('UF é obrigatório')
+          .length(2, 'UF deve ser duas letras'),
+        formattedSalary: Yup.number().required('Salário é obrigatório'),
+        status: Yup.string().required('Status é obrigatório'),
+      });
+
+      const formattedSalary = Number(salary);
+      await schema.validate(
+        { name, cpf, job, signUpDate, uf, formattedSalary, status },
+        {
+          abortEarly: false,
+        },
+      );
+
       const newCollaborator = {
         name,
-        cpf: CPF,
+        cpf,
         job,
-        salary: Number(salary),
-        uf: UF,
+        salary: formattedSalary,
+        uf,
         status,
         signUpDate,
       };
 
-      const response = await api.post('/', newCollaborator);
+      await api.post('/', newCollaborator);
 
-      if (response.data) {
-        setName('');
-        setCPF('');
-        setJob('');
-        setSalary('');
-        setUF('');
-        setStatus('');
-        setSignUpDate('');
+      setName('');
+      setCPF('');
+      setJob('');
+      setSalary('');
+      setUF('');
+      setStatus('');
+      setSignUpDate('');
 
-        toast('Funcionário cadastrado', { autoClose: 3000 });
+      toast('Funcionário cadastrado', { autoClose: 5000 });
+    } catch (err) {
+      if (err.errors) {
+        const { errors }: Errors = err;
+        errors.map(errorMessage => toast(errorMessage, { autoClose: 5000 }));
+      } else {
+        toast('Falha no cadastro de novo funcionário. Tente novamente!', {
+          autoClose: 5000,
+        });
       }
     }
-
-    if (
-      name.length &&
-      CPF.length === 11 &&
-      job.length &&
-      salary.length &&
-      UF.length === 2 &&
-      signUpDate.length
-    ) {
-      createNewCollaborator();
-    } else {
-      toast('Preencha todos os dados corretamente!', { autoClose: 3000 });
-    }
-  }, [name, CPF, job, salary, UF, status, signUpDate]);
+  }, [name, cpf, job, signUpDate, salary, uf, status]);
 
   return (
     <Container>
@@ -78,7 +99,6 @@ const SignUp: React.FC = () => {
           <InputName>Nome:</InputName>
           <InputField
             value={name}
-            required
             placeholder="Aaron Aaby"
             onChange={e => setName(e.target.value)}
           />
@@ -87,8 +107,7 @@ const SignUp: React.FC = () => {
         <InputContainer>
           <InputName>CPF:</InputName>
           <InputField
-            value={CPF}
-            required
+            value={cpf}
             placeholder="00011122234"
             onChange={e => setCPF(e.target.value)}
           />
@@ -98,7 +117,6 @@ const SignUp: React.FC = () => {
           <InputName>Cargo:</InputName>
           <InputField
             value={job}
-            required
             placeholder="PO Sr"
             onChange={e => setJob(e.target.value)}
           />
@@ -108,7 +126,6 @@ const SignUp: React.FC = () => {
           <InputName>Salário:</InputName>
           <InputField
             value={salary}
-            required
             placeholder="325"
             onChange={e => setSalary(e.target.value)}
           />
@@ -117,8 +134,7 @@ const SignUp: React.FC = () => {
         <InputContainer>
           <InputName>UF:</InputName>
           <InputField
-            value={UF}
-            required
+            value={uf}
             placeholder="MG"
             onChange={e => setUF(e.target.value.toUpperCase())}
           />
@@ -153,7 +169,6 @@ const SignUp: React.FC = () => {
           <InputField
             value={signUpDate}
             type="date"
-            required
             onChange={e => setSignUpDate(e.target.value)}
           />
         </InputContainer>
